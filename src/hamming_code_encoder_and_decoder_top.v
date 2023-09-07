@@ -23,6 +23,8 @@ module tt_um_LEOGLM_hamming_code_top #( parameter MAX_COUNT = 10_000_000 ) (
 
     reg         state;          //switch mode: 0:encoder 1:decoder
 
+    assign uio_out_reg[7:3]= 5'b 0;
+    
     hamming_code_encoder_top A1(
         .msg_in_en(msg_in_en),
         .rst_n_en(rst_n),
