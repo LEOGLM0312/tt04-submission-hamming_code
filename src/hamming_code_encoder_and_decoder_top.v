@@ -49,13 +49,13 @@ module tt_um_LEOGLM_hamming_code_top #( parameter MAX_COUNT = 10_000_000 ) (
 
     always@(*) begin
         if (state==0) begin
-            uio_oe_reg    = 0;
+            uio_oe_reg    = 8'b00000000;
             enable_en     = ui_in[1];
             msg_in_en     = {ui_in[7:3],uio_in[5:0]};
             uo_out_reg[0] = msg_out_en;
         end
         else begin
-            uio_oe_reg                       = 1;
+            uio_oe_reg                       = 8'b 11111111;
             msg_in_de                        = ui_in[2];
             {uo_out_reg,uio_out_reg[2:0]}    = msg_out_de;
         end
