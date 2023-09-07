@@ -39,7 +39,6 @@ module tt_um_LEOGLM_hamming_code_top #( parameter MAX_COUNT = 10_000_000 ) (
     );
 
     always@(posedge ui_in[0] or negedge rst_n) begin
-        uio_out_reg[7:5] <= 3'b 000;
         if (rst_n == 0)
             state <= 0;
         else 
@@ -47,6 +46,7 @@ module tt_um_LEOGLM_hamming_code_top #( parameter MAX_COUNT = 10_000_000 ) (
     end
 
     always@(*) begin
+        uio_out_reg[7:5]  = 3'b 000;
         if (state==0) begin
             uo_out_reg[0] = 0;  //state: encoder
             uio_oe_reg    = 8'b00000000;
