@@ -33,11 +33,11 @@ documentation:
 
 # Longer description of how the project works. You can use standard markdown format.
   how_it_works: |
-      The project consists of two parts, including a (11,7) hamming code encoder connected to an UART Transimitter and a decoder connected to an UART receiver. The encoder and decoder share the same set of input/output ports. They can be switch by inserting an impulse at ui_in[0].The encoder adds four parity bits to a sequence of parallel data. The UART transimitter rearranges and sends the coded data in series. The UART receiver receives msg in series and convert it to parallel for. Finally, the decoder decode the msg and correct potential error, and output the original msg.
+      The project is divided into two parts: a (11,7) Hamming code encoder connected to a UART transmitter, and a decoder connected to a UART receiver. Both the encoder and decoder share the same set of input/output ports, which can be switched by inserting an impulse at ui_in[0]. The encoder adds four parity bits to a sequence of parallel data, improving its error detection and correction capabilities. The UART transmitter then rearranges and sends the coded data in series. On the receiving end, the UART receiver receives the message in series and converts it back to parallel form for further processing. Finally, the decoder decodes the message, corrects any potential errors, and outputs the original message, ensuring reliable and accurate data transmission.
 
 # Instructions on how someone could test your project, include things like what buttons do what and how to set the clock if needed
   how_to_test:  |
-      The encoder can be tested by inserting a sequence of parallel data and see whether the output data in series is coded correctly. For the decoder, input can be a sequence of coded data in series, with at most one bit error, and see whether the decoder can output the correct data. 
+      To test the encoder, a sequence of parallel data can be inserted and the resulting coded data in series can be checked for accuracy. For the decoder, a sequence of coded data in series can be inputted, with a maximum of one bit error, to verify whether the decoder can output the correct data.
 
 # A description of what the inputs do (e.g. red button, SPI CLK, SPI MOSI, etc).
   inputs:               
@@ -51,7 +51,8 @@ documentation:
     - encoder_input
 # A description of what the outputs do (e.g. status LED, SPI MISO, etc)
   outputs:
-    - encoder_output/decoder_output
+    - encoder_output
+    /decoder_output
     - decoder_output
     - decoder_output
     - decoder_output
