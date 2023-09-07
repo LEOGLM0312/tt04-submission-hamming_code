@@ -8,7 +8,7 @@ project:
   source_files:        
     - UART_rx.v
     - UART_tx.v
-    - hamming_coder_coder.v
+    - hamming_code_coder.v
     - hamming_code_decoder.v
     - hamming_code_decoder_top.v
     - hamming_code_encoder_and_decoder_top.v
