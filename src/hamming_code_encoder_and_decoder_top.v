@@ -23,8 +23,6 @@ module tt_um_LEOGLM_hamming_code_top #( parameter MAX_COUNT = 10_000_000 ) (
 
     reg         state;          //switch mode: 0:encoder 1:decoder
 
-    assign uio_out_reg[7:3]= 5'b 0;
-    
     hamming_code_encoder_top A1(
         .msg_in_en(msg_in_en),
         .rst_n_en(rst_n),
@@ -41,6 +39,7 @@ module tt_um_LEOGLM_hamming_code_top #( parameter MAX_COUNT = 10_000_000 ) (
     );
 
     always@(posedge ui_in[0] or negedge rst_n) begin
+        uio_out_reg[7:5] <= 3'b 000;
         if (rst_n == 0)
             state <= 0;
         else 
@@ -49,15 +48,17 @@ module tt_um_LEOGLM_hamming_code_top #( parameter MAX_COUNT = 10_000_000 ) (
 
     always@(*) begin
         if (state==0) begin
+            uo_out_reg[0] = 0;  //state: encoder
             uio_oe_reg    = 8'b00000000;
             enable_en     = ui_in[1];
             msg_in_en     = {ui_in[7:3],uio_in[5:0]};
-            uo_out_reg[0] = msg_out_en;
+            uo_out_reg[1] = msg_out_en;
         end
         else begin
-            uio_oe_reg                       = 8'b 11111111;
-            msg_in_de                        = ui_in[2];
-            {uo_out_reg,uio_out_reg[2:0]}    = msg_out_de;
+            uo_out_reg[0]                         = 1;  //state:decoder
+            uio_oe_reg                            = 8'b11111111;
+            msg_in_de                             = ui_in[2];
+            {uo_out_reg[7:2],uio_out_reg[4:0]}    = msg_out_de;
         end
     end
     assign uo_out = uo_out_reg;
